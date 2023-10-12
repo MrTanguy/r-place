@@ -5,10 +5,12 @@ Pour ce faire, ce projet utilise un websocket et un serveur/client developpé en
 
 ## Initialiser le projet 
 
-`git clone https://github.com/MrTanguy/r-place.git` 
-`cd r-place`
-`git checkout dev`
-`npm install`
+```
+git clone https://github.com/MrTanguy/r-place.git
+cd r-place
+git checkout dev
+npm install
+```
 
 ## Créer la base de données
 
