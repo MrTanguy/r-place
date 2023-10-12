@@ -51,7 +51,7 @@ async function updatePixel(pixel) {
             }
             const sql = `
                         INSERT INTO ${process.env.MYSQL_DB_TABLE} (position, color)
-                        VALUES ('${pixel.position}', ${pixel.color})
+                        VALUES ('${pixel.position}', '${pixel.color}')
                         ON DUPLICATE KEY UPDATE color = VALUES(color);`;
 
             db.query(sql, function(err, result) {

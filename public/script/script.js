@@ -13,22 +13,12 @@ socket.addEventListener('message', (event) => {
     let canvas = document.getElementById('place');
     const ctx = canvas.getContext("2d");
 
-    let colors = {
-        0: 'white', 
-        1: 'Red', 
-        2: 'Green', 
-        3: 'Blue'
-    }
-
     // On parcourt l'objet reçu pour créer les différents pixels
     data.forEach(pixel => {
         let [x, y] = pixel.position.split('-').map(Number);
-
-        ctx.fillStyle = colors[pixel.color];
+        ctx.fillStyle = pixel.color;
         ctx.fillRect(x, y, 1, 1);
     });    
-
-    
 
 });
 
