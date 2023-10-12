@@ -5,6 +5,7 @@ socket.addEventListener('open', (event) => {
     console.log('Connected to the WebSocket server');
 });
 
+// Lorsque le serveur va nous envoyer un message
 socket.addEventListener('message', (event) => {
 
     const data = JSON.parse(event.data)
@@ -19,8 +20,8 @@ socket.addEventListener('message', (event) => {
         3: 'Blue'
     }
 
+    // On parcourt l'objet reçu pour créer les différents pixels
     data.forEach(pixel => {
-
         let [x, y] = pixel.position.split('-').map(Number);
 
         ctx.fillStyle = colors[pixel.color];
