@@ -15,7 +15,7 @@ Pour ce faire, ce projet utilise un websocket et un serveur/client developpé en
 Dans votre base de données MySQL, éxécuter ce script : 
 
 `
-CREATE TABLE `r-place`.`pixel` (`id` INT NOT NULL AUTO_INCREMENT , `position` VARCHAR(255) NOT NULL , `color` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`), UNIQUE (`position`)) ENGINE = InnoDB;
+CREATE TABLE \`r-place\`.\`pixel\` (\`id\` INT NOT NULL AUTO_INCREMENT , \`position\` VARCHAR(255) NOT NULL , \`color\` VARCHAR(255) NOT NULL , PRIMARY KEY (\`id\`), UNIQUE (\`position\`)) ENGINE = InnoDB;
 `
 
 Cette requête va créer la base r-place, dans laquelle il va y avoir la table pixel. <br>
