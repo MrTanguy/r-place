@@ -1,7 +1,7 @@
 # r-place
 
 Ce projet a pour but de simuler en local la fameuse pixel war organisée par reddit. <br>
-Pour ce faire, ce projet utilise un websocket et un serveur/client developpé en JavaScript.
+Pour ce faire, ce projet utilise un websocket et un serveur/client developpé en JavaScript avec NodeJS (qui sont des prérequis).
 
 ## Initialiser le projet 
 
