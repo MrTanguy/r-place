@@ -24,7 +24,7 @@ La table contient 3 colonnes : id - position - couleur
 Créer le fichier .env en suivant le template : 
 
 `
-MYSQL_HOST = "localhost"
+MYSQL_HOST = "localhost"<br>
 MYSQL_USER = ""
 MYSQL_PWD = ""
 MYSQL_DB = "r-place"
