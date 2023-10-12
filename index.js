@@ -1,23 +1,55 @@
 const express = require('express');
-const http = require('http');
+//const { MongoClient } = require("mongodb");
 const WebSocket = require('ws');
 const path = require('path');
 const CLI_PORT = 3000;
 const WS_PORT = 4000;
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const app = express();
-
-
 const wss = new WebSocket.Server({ port: WS_PORT })
 
-wss.on('connection', (ws) => {
+async function dbGetAllPixels() {
+    return new Promise((resolve, reject) => {
+        var mysql = require('mysql');
+
+        var db = mysql.createConnection({
+            host: process.env.MYSQL_HOST,
+            user: process.env.MYSQL_USER,
+            password: process.env.MYSQL_PWD,
+            database: process.env.MYSQL_DB
+        });
+
+        db.connect(function(err) {
+            if (err) {
+                return reject('error: ' + err.message);
+            }
+            db.query("SELECT position, color FROM pixel", function(err, result) {
+                if (err) return reject(err);
+                resolve(result);
+            });
+        });
+    });
+}
+
+
+wss.on('connection', async (ws) => {
 
     console.log('Client connected');
 
-    ws.send('Welcome to the WebSocket server!');
-
+    try {
+        const allPixels = await dbGetAllPixels();
+        ws.send(JSON.stringify(allPixels));
+    } catch (error) {
+        console.error("Erreur lors de la récupération des pixels:", error);
+    }
     ws.on("message", data => {
-    console.log(`Client has sent us: ${data}`)
+        console.log(`Client has sent us: ${data}`)
+        wss.clients.forEach(client => {
+            client.send('test')
+        });
     });
 
     ws.on("close", () => {
@@ -27,11 +59,12 @@ wss.on('connection', (ws) => {
     ws.onerror = function () {
         console.log("Some Error occurred")
     }
+
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(CLI_PORT, () => {
-    console.log(`Serveur lancé sur http://localhost:${CLI_PORT}`);
+    console.log(`Serveur lancé sur http://127.0.0.1:${CLI_PORT}`);
 });
 
