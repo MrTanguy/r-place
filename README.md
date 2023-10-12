@@ -21,13 +21,13 @@ CREATE TABLE `r-place`.`pixel` (`id` INT NOT NULL AUTO_INCREMENT , `position` VA
 Cette requête va créer la base r-place, dans laquelle il va y avoir la table pixel. <br>
 La table contient 3 colonnes : id - position - couleur
 
-Créer le fichier .env en suivant le template : 
+A la racine du projet, créer le fichier .env en suivant le template : 
 
 `
-MYSQL_HOST = "localhost"\
-MYSQL_USER = ""
-MYSQL_PWD = ""
-MYSQL_DB = "r-place"
+MYSQL_HOST = "localhost"  
+MYSQL_USER = ""  
+MYSQL_PWD = ""  
+MYSQL_DB = "r-place"  
 MYSQL_DB_TABLE = "pixel"
 `
 
