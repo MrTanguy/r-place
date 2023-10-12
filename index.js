@@ -34,6 +34,29 @@ async function dbGetAllPixels() {
     });
 }
 
+async function updatePixel() {
+    return new Promise((resolve, reject) => {
+        var mysql = require('mysql');
+
+        var db = mysql.createConnection({
+            host: process.env.MYSQL_HOST,
+            user: process.env.MYSQL_USER,
+            password: process.env.MYSQL_PWD,
+            database: process.env.MYSQL_DB
+        });
+
+        db.connect(function(err) {
+            if (err) {
+                return reject('error: ' + err.message);
+            }
+            db.query("SELECT position, color FROM pixel", function(err, result) {
+                if (err) return reject(err);
+                resolve(result);
+            });
+        });
+    });
+}
+
 
 wss.on('connection', async (ws) => {
 
@@ -48,7 +71,7 @@ wss.on('connection', async (ws) => {
     ws.on("message", data => {
         console.log(`Client has sent us: ${data}`)
         wss.clients.forEach(client => {
-            client.send('test')
+            //client.send('test')
         });
     });
 
