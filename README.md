@@ -37,7 +37,7 @@ Si le script sql a été lancé, MYSQL_DB et MYSQL_DB_TABLE ont déjà les bonne
 
 ## Lancer le projet 
 
-`node node .\index.js`
+`node .\index.js`
 
 
 
