@@ -34,7 +34,7 @@ async function dbGetAllPixels() {
     });
 }
 
-async function updatePixel() {
+async function updatePixel(pixel) {
     return new Promise((resolve, reject) => {
         var mysql = require('mysql');
 
@@ -49,7 +49,12 @@ async function updatePixel() {
             if (err) {
                 return reject('error: ' + err.message);
             }
-            db.query("SELECT position, color FROM pixel", function(err, result) {
+            const sql = `
+                        INSERT INTO pixel (position, color)
+                        VALUES ('${pixel.position}', ${pixel.color})
+                        ON DUPLICATE KEY UPDATE color = VALUES(color);`;
+
+            db.query(sql, function(err, result) {
                 if (err) return reject(err);
                 resolve(result);
             });
@@ -69,9 +74,12 @@ wss.on('connection', async (ws) => {
         console.error("Erreur lors de la récupération des pixels:", error);
     }
     ws.on("message", data => {
-        console.log(`Client has sent us: ${data}`)
+        const pixel = JSON.parse(data)
+
+        updatePixel(pixel)
+
         wss.clients.forEach(client => {
-            //client.send('test')
+            client.send(JSON.stringify([pixel]))
         });
     });
 

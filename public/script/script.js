@@ -3,13 +3,9 @@ const socket = new WebSocket('ws://localhost:4000');
 
 socket.addEventListener('open', (event) => {
     console.log('Connected to the WebSocket server');
-    socket.send('Hello, server!');
 });
 
 socket.addEventListener('message', (event) => {
-
-    console.log(`Message from server: ${event.data}`);
-   
 
     const data = JSON.parse(event.data)
 
@@ -40,8 +36,12 @@ let button = document.getElementById('buttonValidate');
 
 button.addEventListener('click', () => {
 
-    let selector = document.getElementById('color')
+    let x = document.getElementById('x').value;
+    let y = document.getElementById('y').value;
+    let color = document.getElementById('color').value;
 
-    socket.send(selector.value)
+    if (x != "" && y != "") {
+        socket.send(JSON.stringify({'position':`${x}-${y}`, 'color': color}))
+    } 
 
 })
