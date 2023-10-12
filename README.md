@@ -22,7 +22,7 @@ CREATE TABLE `r-place`.`pixel` (`id` INT NOT NULL AUTO_INCREMENT , `position` VA
 ```
 
 Cette requête va créer la base r-place, dans laquelle il va y avoir la table pixel. <br>
-La table contient 3 colonnes : id - position - couleur
+La table contient 3 colonnes : id - position - color
 
 ## Configurer le projet 
 
