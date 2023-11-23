@@ -12,13 +12,13 @@ const wss = new WebSocket.Server({ port: WS_PORT })
 // Fonction utilisée à la connexion d'un client pour récupérer tous les pixels modifiés
 async function dbGetAllPixels() {
     return new Promise((resolve, reject) => {
-        var mysql = require('mysql');
+        var mysql = require('mysql2');
 
         var db = mysql.createConnection({
-            host: process.env.MYSQL_HOST,
-            user: process.env.MYSQL_USER,
-            password: process.env.MYSQL_PWD,
-            database: process.env.MYSQL_DB
+            host: process.env.MYSQL_HOST || "host.docker.internal",
+            user: process.env.MYSQL_USER || "mysql",
+            password: process.env.MYSQL_PWD || "Password123",
+            database: "r-place"
         });
 
         db.connect(function(err) {
@@ -36,13 +36,13 @@ async function dbGetAllPixels() {
 // Fonction utilisée pour mettre à jour un pixel
 async function updatePixel(pixel) {
     return new Promise((resolve, reject) => {
-        var mysql = require('mysql');
+        var mysql = require('mysql2');
 
         var db = mysql.createConnection({
-            host: process.env.MYSQL_HOST,
-            user: process.env.MYSQL_USER,
-            password: process.env.MYSQL_PWD,
-            database: process.env.MYSQL_DB
+            host: process.env.MYSQL_HOST || "host.docker.internal",
+            user: process.env.MYSQL_USER || "mysql",
+            password: process.env.MYSQL_PWD || "Password123",
+            database: "r-place"
         });
 
         db.connect(function(err) {
@@ -50,7 +50,7 @@ async function updatePixel(pixel) {
                 return reject('error: ' + err.message);
             }
             const sql = `
-                        INSERT INTO ${process.env.MYSQL_DB_TABLE} (position, color)
+                        INSERT INTO pixel (position, color)
                         VALUES ('${pixel.position}', '${pixel.color}')
                         ON DUPLICATE KEY UPDATE color = VALUES(color);`;
 
