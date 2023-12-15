@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+</head>
+<body style="background-color: #717e91;">
+    <div style="text-align: center;">
+        <div>PIXEL WAR</div>
+
+        <div>
+            <canvas id="place" height="700px" width="1000px" style="border: 3px solid black;"></canvas>
+        </div>
+
+        <div>
+
+            <label>Modifier un pixel:</label><br>
+            <label>Position en x:</label><input type="number" id="x" min="1" max="1000"/><br>
+            <label>Position en y:</label><input type="number" id="y" min="1" max="700"/><br>
+            <label>Couleur:</label><input type="color" id="color" value="#e66465" />
+
+            <button type="submit" id="buttonValidate">Valider</button>
+        </div>
+    </div>
+    <script src="script/script.js"></script>
+</body>
+</html>
